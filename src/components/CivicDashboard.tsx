@@ -24,6 +24,7 @@ interface CivicDashboardProps {
   onViewPolitician: (politicianId: string) => void
   onCompare: (politicians: string[]) => void
   onBack: () => void
+  onOpenSettings: () => void
 }
 
 const MOCK_POLITICIANS_DATA: Politician[] = [
@@ -130,7 +131,8 @@ export function CivicDashboard({
   selectedPoliticians, 
   onViewPolitician, 
   onCompare, 
-  onBack 
+  onBack,
+  onOpenSettings 
 }: CivicDashboardProps) {
   const [selectedForComparison, setSelectedForComparison] = useState<string[]>([])
 
@@ -193,7 +195,7 @@ export function CivicDashboard({
             </p>
           </div>
           <div className="flex items-center space-x-4">
-            <Button variant="outline" size="sm">
+            <Button variant="outline" size="sm" onClick={onOpenSettings}>
               <Settings className="h-4 w-4 mr-2" />
               Configurações
             </Button>

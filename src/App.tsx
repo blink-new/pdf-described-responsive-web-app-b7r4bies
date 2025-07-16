@@ -5,6 +5,7 @@ import { PoliticianSelection } from './components/PoliticianSelection'
 import { CivicDashboard } from './components/CivicDashboard'
 import { PoliticianProfile } from './components/PoliticianProfile'
 import { ComparisonTool } from './components/ComparisonTool'
+import SettingsPanel from './components/SettingsPanel'
 
 export type Priority = {
   id: string
@@ -44,6 +45,7 @@ function App() {
   const [selectedPoliticians, setSelectedPoliticians] = useState<string[]>([])
   const [selectedPolitician, setSelectedPolitician] = useState<string | null>(null)
   const [comparisonPoliticians, setComparisonPoliticians] = useState<string[]>([])
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false)
 
   const handleStateChange = (newState: AppState) => {
     setCurrentState(newState)
@@ -91,6 +93,7 @@ function App() {
             onViewPolitician={handlePoliticianView}
             onCompare={handleComparison}
             onBack={() => handleStateChange('politicians')}
+            onOpenSettings={() => setIsSettingsOpen(true)}
           />
         )
       case 'profile':
@@ -117,6 +120,10 @@ function App() {
   return (
     <div className="min-h-screen bg-background">
       {renderCurrentScreen()}
+      <SettingsPanel 
+        isOpen={isSettingsOpen} 
+        onClose={() => setIsSettingsOpen(false)} 
+      />
     </div>
   )
 }
